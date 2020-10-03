@@ -199,6 +199,7 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
       switch response {
           case .success:
             let resendData = FlutterResendSignUpCodeResult(res: response)
+
             flutterResult(resendData.toJSON())
           case .failure(let signUpError):
             self.handleAuthError(error: signUpError, flutterResult: flutterResult, msg: FlutterAuthErrorMessage.RESEND_SIGNUP.rawValue)
@@ -312,6 +313,7 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
                "Please sign in and reattempt the operation."
            )
         }
+        dump(user)
         let userData = FlutterAuthUserResult(res: user)
         flutterResult(userData.toJSON())
         
