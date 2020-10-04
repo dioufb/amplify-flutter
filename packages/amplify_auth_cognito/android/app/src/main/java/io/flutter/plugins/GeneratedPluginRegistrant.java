@@ -1,7 +1,6 @@
 package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
-import com.amazonaws.amplify.amplify_core.Core;
 import com.amazonaws.amplify.amplify_auth_cognito.AuthCognito;
 
 /**
@@ -12,7 +11,6 @@ public final class GeneratedPluginRegistrant {
     if (alreadyRegisteredWith(registry)) {
       return;
     }
-    Core.registerWith(registry.registrarFor("com.amazonaws.amplify.amplify_core.Core"));
     AuthCognito.registerWith(registry.registrarFor("com.amazonaws.amplify.amplify_auth_cognito.AuthCognito"));
   }
 
