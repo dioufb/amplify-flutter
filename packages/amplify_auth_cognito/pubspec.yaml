@@ -11,7 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   amplify_auth_plugin_interface:
-    path: ../amplify_auth_plugin_interface
+    git:
+      url: https://github.com/dioufb/amplify-flutter
+      path: packages/amplify_auth_plugin_interface 
   plugin_platform_interface: ^1.0.1
  
 # dev_dependencies:  
