@@ -313,9 +313,24 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
                "Please sign in and reattempt the operation."
            )
         }
+
+        guard let userAttribs = Amplify.Auth.fetchUserAttributes() else {
+           throw AuthError.signedOut(
+               "You are currently signed out.",
+               "Please sign in and reattempt the operation."
+           )
+        }
+
+
         dump(user)
+        dump(userAttribs)
         let userData = FlutterAuthUserResult(res: user)
-        flutterResult(userData.toJSON())
+
+        let outVal = userData.toJSON()
+        
+        outVal["attribs"]=userAttribs
+
+        flutterResult(outVal)
         
       } catch {
           self.handleAuthError(error: error as! AuthError, flutterResult: flutterResult,  msg: FlutterAuthErrorMessage.GET_CURRENT_USER.rawValue)

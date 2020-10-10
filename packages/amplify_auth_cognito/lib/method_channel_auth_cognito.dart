@@ -255,7 +255,7 @@ class AmplifyAuthCognitoMethodChannel extends AmplifyAuthCognito {
           'data': request != null ? request.serializeAsMap() : {},
         },
       );
-      res = _formatAuthUserResponse(data, dataAttribs);
+      res = _formatAuthUserResponse(data);
       // res["attributes"] = dataAttribs;
       return res;
     } on PlatformException catch (e) {
@@ -318,12 +318,12 @@ class AmplifyAuthCognitoMethodChannel extends AmplifyAuthCognito {
   }
 
   Map<String, dynamic> _formatAuthUserResponse(
-      Map<String, dynamic> authUserResponse, Map<String, dynamic> attribs) {
+      Map<String, dynamic> authUserResponse) {
     return {
       'user': AuthUser(
           userId: authUserResponse["userId"],
           username: authUserResponse["username"]),
-      'attributes': attribs
+      'attributes': authUserResponse["attribs"]
     };
   }
 
