@@ -248,6 +248,7 @@ class AmplifyAuthCognitoMethodChannel extends AmplifyAuthCognito {
           'data': request != null ? request.serializeAsMap() : {},
         },
       );
+
       // final Map<String, dynamic> dataAttribs =
       //     await _channel.invokeMapMethod<String, dynamic>(
       //   'fetchUserAttributes',
