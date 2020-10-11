@@ -317,7 +317,7 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
 
         let userAttribs = Amplify.Auth.fetchUserAttributes()
         Amplify.Auth.fetchUserAttributes() { result in
-            var resu
+            var resu : [AuthUserAttribute]
             switch result {
               case .success(let attributes):
                   print("User attributes - \(attributes)")
