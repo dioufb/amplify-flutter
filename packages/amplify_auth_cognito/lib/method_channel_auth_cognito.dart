@@ -320,7 +320,7 @@ class AmplifyAuthCognitoMethodChannel extends AmplifyAuthCognito {
 
   Map<String, dynamic> _formatAuthUserResponse(
       Map<String, dynamic> authUserResponse) {
-    return authUserResponse["attribs"];
+    return {"user": authUserResponse["attribs"]};
   }
 
   ResetPasswordResult _formatResetPasswordResponse(Map<String, dynamic> res) {
