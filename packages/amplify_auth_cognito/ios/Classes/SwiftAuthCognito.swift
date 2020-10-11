@@ -331,7 +331,18 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
 
             var outVal = userData.toJSON()
 
-            outVal["attribs"]=resu
+            // var attribs = Dictionary<String,Any>()
+
+            outVal["attribs"]=resu.reduce(outVal, {outVal, attr in
+                var keyName = "\(attr.key)"
+                if (keyName=="custom" {
+                  keyName = "\(attr.key["custom"])"
+                })
+                if (keyName=="unknown" {
+                  keyName = "\(attr.key["unknown"])"
+                })                
+                outVal[keyName] = attr.value
+            })
 
             flutterResult(outVal)            
         }
