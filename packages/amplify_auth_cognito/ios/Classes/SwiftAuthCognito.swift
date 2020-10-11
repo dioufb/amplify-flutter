@@ -315,7 +315,7 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
         }
         dump(user)
 
-        let userAttribs = Amplify.Auth.fetchUserAttributes()
+        // let userAttribs = Amplify.Auth.fetchUserAttributes()
         Amplify.Auth.fetchUserAttributes() { result in
             var resu : [AuthUserAttribute]
             switch result {
@@ -334,7 +334,17 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
             // var attribs = Dictionary<String,Any>()
 
             outVal["attribs"]=resu.reduce(outVal){curattribs, attr in
-                let keyName = "\(attr.key)"
+                  var keyName = "\(attr.key)"
+                  switch attr.key {
+                    case .custom(let keyn):
+                        print("User attributes - \(keyn)")
+                        keyName = keyn
+                    case .unknown(let keyn):
+                        print("Fetching user attributes failed with error \(keyn)")
+                        keyName = keyn
+                    default: ()
+                  }
+
 //                if (keyName=="custom") {
 //                  keyName = "\(attr.key["custom"])"
 //                }
