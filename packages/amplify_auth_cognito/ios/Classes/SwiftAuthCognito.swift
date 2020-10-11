@@ -316,15 +316,26 @@ public class SwiftAuthCognito: NSObject, FlutterPlugin, FlutterStreamHandler {
         dump(user)
 
         let userAttribs = Amplify.Auth.fetchUserAttributes()
+        Amplify.Auth.fetchUserAttributes() { result in
+            var resu
+            switch result {
+              case .success(let attributes):
+                  print("User attributes - \(attributes)")
+                  resu = attributes
+              case .failure(let error):
+                  print("Fetching user attributes failed with error \(error)")
+                  resu = []
+            }
+            dump(resu)
+            let userData = FlutterAuthUserResult(res: user)
 
-        dump(userAttribs)
-        let userData = FlutterAuthUserResult(res: user)
+            var outVal = userData.toJSON()
 
-        let outVal = userData.toJSON()
+            outVal["attribs"]=resu
 
-        outVal["attribs"]=userAttribs
+            flutterResult(outVal)            
+        }
 
-        flutterResult(outVal)
         
       } catch {
           self.handleAuthError(error: error as! AuthError, flutterResult: flutterResult,  msg: FlutterAuthErrorMessage.GET_CURRENT_USER.rawValue)
