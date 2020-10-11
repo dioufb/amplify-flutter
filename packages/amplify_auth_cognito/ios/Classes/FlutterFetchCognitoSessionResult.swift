@@ -78,9 +78,11 @@ struct FlutterFetchCognitoSessionResult {
 
     if let awsCredentialsProvider = session as? AuthAWSCredentialsProvider {
       let creds =  try awsCredentialsProvider.getAWSCredentials().get()
-        credentialMap["awsAccessKey"] = creds.accessKey
-        credentialMap["awsSecretKey"] = creds.secretKey
-        credentialMap["sessionToken"] = creds.sessionToken
+      dump(creds)
+      credentialMap["awsAccessKey"] = creds.accessKey
+      credentialMap["awsSecretKey"] = creds.secretKey
+      credentialMap["sessionToken"] = creds.sessionKey
+      credentialMap["expiration"] = creds.expiration
     }
     
     return credentialMap;
